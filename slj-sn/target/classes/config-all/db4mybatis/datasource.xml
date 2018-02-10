@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cutesource="http://www.mark.org/schema/people"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="dbDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" init-method="createPool" destroy-method="close" >
+		<property name="driverClassName" value="${dbDataSource.driverClassName}"/>
+		<property name="url" value="${dbDataSource.url}"/>
+		<property name="username" value="${dbDataSource.username}"/>
+		<property name="password" value="${dbDataSource.password}"/>
+		<property name="initialSize" value="${dbDataSource.initailSize}"/>
+		<property name="maxActive" value="${dbDataSource.maxActive}"/>
+		<property name="maxWait" value="${dbDataSource.maxWait}"/>
+		<property name="maxIdle" value="${dbDataSource.maxIdle}"/>
+		<property name="minIdle" value="${dbDataSource.minIdle}"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="testOnBorrow" value="false"/>
+<!--		<property name="validationQuery" value="values 1"/>-->
+		<property name="fairQueue" value="true"/>
+		<property name="jmxEnabled" value="false"/>
+		<property name="name" value="dataSource"/>
+		<property name="defaultAutoCommit" value="true"/>
+		<property name="jdbcInterceptors" value="ConnectionState(useEquals=true,fast=yes)"/>
+<!--		<property name="jdbcInterceptors" value="SlowQueryReport(threshold=500)"/>-->
+	</bean>
+	
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!--     Connection Info -->
+<!--     <property name="driverClassName" value="${jdbc.driver}" /> -->
+<!--     <property name="url" value="${jdbc.url}" /> -->
+<!--     <property name="username" value="${jdbc.username}" /> -->
+<!--     <property name="password" value="${jdbc.password}" /> -->
+
+<!--     Connection Pooling Info -->
+<!--     <property name="maxIdle" value="${dbcp.maxIdle}" /> -->
+<!--     <property name="maxActive" value="${dbcp.maxActive}" /> -->
+<!--     <property name="defaultAutoCommit" value="false" /> -->
+<!--     <property name="timeBetweenEvictionRunsMillis" value="3600000" /> -->
+<!--     <property name="minEvictableIdleTimeMillis" value="3600000" /> -->
+<!-- </bean> -->
+	
+</beans>

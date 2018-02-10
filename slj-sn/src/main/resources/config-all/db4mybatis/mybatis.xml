@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	">
+	
+	<import resource="datasource.xml" />
+	
+	<!--  package scan  -->
+<!-- 	<bean id="MapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+<!-- 		<property name="basePackage" value="org.slg.dao.mapper" /> -->
+<!-- 		<property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory"></property> -->
+<!-- 	</bean> -->
+	
+	<!-- sqlSessionFactory -->
+	<bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dbDataSource" />
+		<property name="configLocation" value="classpath:config-all/db4mybatis/mapper/Configuration.xml" />
+		<property name="mapperLocations" value="classpath:config-all/db4mybatis/mapper/*/*Mapper.xml" />
+	</bean>
+	
+	<!-- sqlSessionTemplate -->
+	<!-- 针对单个SQL的执行模板 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="mySqlSessionFactory" />
+	</bean>
+	
+	<!-- 事务管理器 -->
+	<bean id="transactionManager4Single" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dbDataSource" />
+	</bean>
+	
+	<!-- 执行SQL的事务模板 -->
+	<bean id="transactionTemplate4Single" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager4Single" />
+		<property name="propagationBehaviorName" value="PROPAGATION_REQUIRED" />
+		<property name="isolationLevelName" value="ISOLATION_DEFAULT" />
+		<property name="readOnly" value="false" />
+		<property name="timeout" value="15" />
+	</bean>
+</beans>

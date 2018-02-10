@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+<mapper namespace="UserMapper"> 
+	
+	<select id="queryUserById" resultMap="cdata" parameterType="cdata"> 
+		<![CDATA[
+		select j.JNLNO,j.TRANSDATE,j.TRANSTIME,j.TRANSCODE,j.JNLSTATE,j.TRSSTATE,j.RETURNCODE,j.RETURNMSG,
+			   j.ACSEQ,j.AMOUNT,j.CURRENCY,j.CRFLAG,j.USERSEQ,j.BANKSEQ,j.CHANNELID,j.DELEGATEFLAG,j.ROOTJNLNO,
+			   j.LOCALADDR,j.ROUTERJNLNO,j.LOGINTYPE,j.FEE from PJNL j where j.TRANSDATE <= #{endDate,jdbcType=DATE} and j.TRANSDATE >= #{beginDate,jdbcType=DATE} order by j.jnlNo limit #{begin,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+			   ]]>
+	</select> 
+	
+</mapper>
